@@ -1,8 +1,8 @@
 {
   "name": "werd",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Words API for JavaScript",
-  "main": "index.js",
+  "main": "api.js",
   "scripts": {
     "lint": "standard",
     "prepublish": "npm run lint"
