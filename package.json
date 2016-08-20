@@ -1,0 +1,36 @@
+{
+  "name": "werd",
+  "version": "0.0.1",
+  "description": "Words API for JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "Sam Gluck <sdgluck@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "word",
+    "words",
+    "api",
+    "werd",
+    "cli",
+    "dictionary",
+    "synonym",
+    "antonym",
+    "meaning",
+    "definition"
+  ],
+  "devDependencies": {
+    "tape": "^4.6.0"
+  },
+  "dependencies": {
+    "axios": "^0.13.1",
+    "inquirer": "^1.1.2",
+    "log-update": "^1.0.2",
+    "meow": "^3.7.0",
+    "node-localstorage": "^1.3.0",
+    "ora": "^0.2.3",
+    "os-homedir": "^1.0.1",
+    "query-string": "^4.2.2"
+  }
+}

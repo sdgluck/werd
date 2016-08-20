@@ -1,0 +1,80 @@
+#!/usr/bin/env node
+'use strict'
+
+const path = require('path')
+const ora = require('ora')
+const meow = require('meow')
+const inquirer = require('inquirer')
+const logUpdate = require('log-update')
+const osHomedir = require('os-homedir')
+const LocalStorage = require('node-localstorage').LocalStorage
+
+const werd = require('./api')
+const print = require('./print')
+const constants = require('./constants')
+
+const profileDir = path.resolve(osHomedir(), '.werd')
+const storage = new LocalStorage(profileDir)
+
+const keyPrompt = {
+  name: 'key',
+  type: 'text',
+  message: 'Enter your Mashape API key:'
+}
+
+const cli = meow(`
+  Usage
+    $ werd <word> [<operation>]
+
+  Inputs
+    word, the word to query
+    operation, the query operation (default: get)
+
+  Examples
+    $ werd chump 
+    $ werd program synonyms
+    $ werd ocean syllables
+`)
+
+Promise
+    .resolve(storage.getItem('mashapeApiKey'))
+    .then((key) => {
+      if (key) {
+        return key
+      }
+
+      logUpdate()
+
+      return inquirer
+        .prompt([keyPrompt])
+        .then((answers) => answers.key)
+    })
+    .then((key) => {
+      const api = werd(key)
+      const spinner = ora()
+
+      storage.setItem('mashapeApiKey', key)
+
+      logUpdate.clear()
+
+      setInterval(() => logUpdate(spinner.frame()), 100)
+
+     const isRandomOp = cli.input[0] === 'random'
+
+      const method = isRandomOp
+        ? api.random
+        : cli.input[1] ? api[cli.input[1]] : api
+
+      if (!method) {
+        console.log(`Unknown operation "${cli.input[1]}"`)
+        process.exit()
+      }
+
+      method(cli.input[0])
+        .then((result) => {
+          logUpdate.clear()
+          print[cli.input[1] || 'get'](isRandomOp ? result.word : cli.input[0], result)
+        })
+        .catch((err) => console.log('A wild error appeared!\n' + err))
+        .then(() => process.exit())
+    })
