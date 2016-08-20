@@ -9,6 +9,8 @@ Made with ❤ at [@outlandish](http://www.twitter.com/outlandish)
 
 An unofficial Words API library for JavaScript with a CLI.
 
+Learn ya'self some words on the command line!
+
 See [wordsapi.com](https://www.wordsapi.com/) for details on the Words API, "an API for the English language".
 
 <img alt="werd demo" src="https://github.com/sdgluck/werd/blob/master/demo.gif">
