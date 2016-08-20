@@ -45,7 +45,7 @@ var werd = require('werd')
 
 ```html
 <!-- Script, available at `window.werd` -->
-<script src="/node_modules/werd/dist/werd.min.js"></script>
+<script src="/node_modules/werd/api.js"></script>
 ```
 
 ## API
