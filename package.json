@@ -4,7 +4,8 @@
   "description": "Words API for JavaScript",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "lint": "standard",
+    "prepublish": "npm run lint"
   },
   "author": "Sam Gluck <sdgluck@gmail.com>",
   "license": "MIT",
@@ -21,6 +22,8 @@
     "definition"
   ],
   "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "standard": "^8.0.0-beta.5",
     "tape": "^4.6.0"
   },
   "dependencies": {
@@ -32,5 +35,8 @@
     "ora": "^0.2.3",
     "os-homedir": "^1.0.1",
     "query-string": "^4.2.2"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   }
 }

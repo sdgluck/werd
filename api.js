@@ -20,7 +20,7 @@ var METHODS = constants.METHODS
 
 function request (url) {
   return axios.get(url).then(function (response) {
-    if (response.status != 200) {
+    if (String(response.status) !== '200') {
       throw new Error(response.status + ' response: ' + response.body)
     }
     return response.data
@@ -48,11 +48,11 @@ function api (word) {
 api.get = api
 
 api.search = function (options) {
-    if (!options) {
-      throw new Error('Expecting options object')
-    }
-    return request(API + '?' + queryString.stringify(options))
+  if (!options) {
+    throw new Error('Expecting options object')
   }
+  return request(API + '?' + queryString.stringify(options))
+}
 
 api.random = function () {
   return request(API + '?random=true')
