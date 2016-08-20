@@ -1,6 +1,6 @@
 {
   "name": "werd",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "Words API for JavaScript",
   "main": "api.js",
   "bin": {
