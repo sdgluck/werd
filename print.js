@@ -102,8 +102,7 @@ module.exports.definitions = (word, data) => {
 
   logHeading`${word}`
 
-  results.length && console.log(`
-    ${results.map((result, i) => {
-      return `\t${i + 1}. ${chalk.yellow(result.partOfSpeech)}, ${result.definition}\n\n`
-    }).join('')}`)
+  results.length && console.log(results.map((result, i) => {
+    return `\t${i + 1}. ${chalk.yellow(result.partOfSpeech)}, ${result.definition}\n\n`
+  }).join(''))
 }
