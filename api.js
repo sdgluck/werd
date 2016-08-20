@@ -1,4 +1,4 @@
-/* global define:false, module:false, self:false */
+/* global Promise:false, define:false, module:false, self:false */
 
 'use strict'
 
@@ -21,7 +21,7 @@ var METHODS = constants.METHODS
 function request (url) {
   return axios.get(url).then(function (response) {
     if (String(response.status) !== '200') {
-      throw new Error(response.status + ' response: ' + response.body)
+      return Promise.reject(Error(response.status + ' response: ' + response.body))
     }
     return response.data
   })
@@ -40,7 +40,7 @@ function werd (mashapeKey) {
 
 function api (word) {
   if (typeof word !== 'string') {
-    throw new Error('Expecting word to be a string')
+    return Promise.reject(Error('Expecting word to be a string'))
   }
   return request([API, word].join('/'))
 }
@@ -49,7 +49,7 @@ api.get = api
 
 api.search = function (options) {
   if (!options) {
-    throw new Error('Expecting options object')
+    return Promise.reject(Error('Expecting options object'))
   }
   return request(API + '?' + queryString.stringify(options))
 }
@@ -61,7 +61,7 @@ api.random = function () {
 METHODS.forEach(function (wordDetailSlug) {
   api[wordDetailSlug] = function (word) {
     if (typeof word !== 'string') {
-      throw new Error('Expecting word to be a string')
+      return Promise.reject(Error('Expecting word to be a string'))
     }
     return request([API, word, wordDetailSlug].join('/'))
   }

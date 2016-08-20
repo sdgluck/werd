@@ -54,16 +54,12 @@ Promise
       const spinner = ora()
 
       storage.setItem('mashapeApiKey', key)
-
       logUpdate.clear()
 
       setInterval(() => logUpdate(spinner.frame()), 100)
 
-     const isRandomOp = cli.input[0] === 'random'
-
-      const method = isRandomOp
-        ? api.random
-        : cli.input[1] ? api[cli.input[1]] : api
+      const isRandomOp = cli.input[0] === 'random'
+      const method = isRandomOp ? api.random : cli.input[1] ? api[cli.input[1]] : api
 
       if (!method) {
         console.log(`Unknown operation "${cli.input[1]}"`)
@@ -75,6 +71,6 @@ Promise
           logUpdate.clear()
           print[cli.input[1] || 'get'](isRandomOp ? result.word : cli.input[0], result)
         })
-        .catch((err) => console.log('A wild error appeared!\n' + err))
+        .catch((err) => logUpdate('A wild error appeared!\n' + err))
         .then(() => process.exit())
     })
