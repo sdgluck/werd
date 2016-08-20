@@ -83,17 +83,17 @@ regionOf, pertainsTo, rhymes, frequency, pronunciation, hasParts
 You will be prompted for your Mashape API key the first time you use the CLI.
 
 ```sh
-$ werd --help
+$ werd|word --help
 
   Usage
-    $ werd <word> [<operation>]
+    $ werd|word <word> [<operation>]
 
   Inputs
     word, the word to query
     operation, the query operation (default: get)
 
   Examples
-    $ werd chump
+    $ word chump
     $ werd program synonyms
     $ werd ocean syllables
 ```
