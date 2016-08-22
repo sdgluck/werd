@@ -30,6 +30,7 @@ npm install --global werd
 ## Requirements
 
 - Mashape Words API key ([get one here](https://market.mashape.com/wordsapi/wordsapi/pricing))
+- Node >= v4 for CLI
 
 ## Import
 
