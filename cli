@@ -4,6 +4,7 @@
 const path = require('path')
 const ora = require('ora')
 const meow = require('meow')
+const chalk = require('chalk')
 const inquirer = require('inquirer')
 const logUpdate = require('log-update')
 const osHomedir = require('os-homedir')
@@ -58,7 +59,8 @@ Promise
 
     setInterval(() => logUpdate(spinner.frame()), 100)
 
-    const isRandomOp = cli.input[0] === 'random'
+    const word = cli.input[0]
+    const isRandomOp = word === 'random'
     const method = isRandomOp ? api.random : cli.input[1] ? api[cli.input[1]] : api
 
     if (!method) {
@@ -66,11 +68,14 @@ Promise
       process.exit()
     }
 
-    method(cli.input[0])
+    method(word)
       .then((result) => {
         logUpdate.clear()
         print[cli.input[1] || 'get'](isRandomOp ? result.word : cli.input[0], result)
       })
-      .catch((err) => logUpdate('A wild error appeared!\n' + err))
+      .catch((err) => {
+        if (/404/.test(err)) logUpdate(`Word "${chalk.yellow(word)}" was not found.`)
+        else logUpdate('A wild error appeared!\n' + err)
+      })
       .then(() => process.exit())
   })
