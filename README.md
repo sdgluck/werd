@@ -57,15 +57,23 @@ _Read the Words API documentation for more details:_
 
 https://market.mashape.com/wordsapi/wordsapi
 
-### `werd(word) : Promise<Object>`
+### `werd(apiKey) : api`
 
-Get a word definition object. Also available as `werd.get()`.
+Get word API instance using the given `apiKey`.
+
+- __apiKey__ {String} Mashape Words API key
+
+Returns the werd `api`.
+
+### `api(word) : Promise<Object>`
+
+Get a word definition object. Also available as `api.get()`.
 
 - __word__ {String} The word
 
 Returns a Promise that resolves to the word definition object.
 
-### `werd.{operation}(word) : Promise<Object>`
+### `api.{operation}(word) : Promise<Object>`
 
 Get data for the given word respective to the chosen operation.
 
